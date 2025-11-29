@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using StudioElevenLib.Level5.Resource;
 
 namespace Level5ResourceEditor.Models
@@ -20,6 +21,8 @@ namespace Level5ResourceEditor.Models
 
         public RESType Type { get; set; }
 
+        public Type FilterType { get; set; }
+
         public int ElementCount
         {
             get => _elementCount;
@@ -27,19 +30,17 @@ namespace Level5ResourceEditor.Models
             {
                 _elementCount = value;
                 OnPropertyChanged(nameof(ElementCount));
+                OnPropertyChanged(nameof(DisplayCount));
             }
         }
+
+        public string DisplayCount => ElementCount.ToString();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public override string ToString()
-        {
-            return DisplayName;
         }
     }
 }

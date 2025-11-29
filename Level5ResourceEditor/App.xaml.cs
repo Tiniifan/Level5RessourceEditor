@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using ImaginationGUI.Services;
 using ImaginationGUI.ViewModels;
-using Microsoft.Win32;
 using Level5ResourceEditor.Services;
 using Level5ResourceEditor.ViewModels.Editor;
 using Level5ResourceEditor.Views.Editor;
@@ -87,7 +87,7 @@ namespace Level5ResourceEditor
                 OpenFileDialog openFileDialog = new OpenFileDialog
                 {
                     Title = TranslationService.Instance.GetTranslation("Globals.FileDialog", "openFile"),
-                    Filter = "RES Files (*.res)|*.res|XRES Files (*.xres)|*.xres|All Files (*.*)|*.*",
+                    Filter = "RES/XRES Files (RES.bin)|RES.bin|All Files (*.*)|*.*",
                     FilterIndex = 1
                 };
 

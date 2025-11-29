@@ -36,7 +36,6 @@ namespace Level5ResourceEditor.ViewModels.Editor
         private ObservableCollection<RESElement> _elements;
         private RESElement _selectedElement;
         private Dictionary<RESType, List<RESElement>> _items;
-        private bool _isXRES;
 
         public ObservableCollection<TypeListViewItem> Scene3DMaterialItems
         {
@@ -166,7 +165,6 @@ namespace Level5ResourceEditor.ViewModels.Editor
         private void InitializeEmptyResource()
         {
             _items = new Dictionary<RESType, List<RESElement>>();
-            _isXRES = false;
 
             InitializeScene3DTypes();
         }
@@ -176,25 +174,24 @@ namespace Level5ResourceEditor.ViewModels.Editor
             // Scene3D Material Types
             var scene3DMaterialTypes = new[]
             {
-                RESType.Material1,
-                RESType.Material2,
-                RESType.TextureData,
-                RESType.MaterialData
+                (RESType.Material1, null, "Material1"),
+                (RESType.Material2, null, "Material2"),
+                (RESType.TextureData, typeof(RESTextureData), "TextureData (RES)"),
+                (RESType.TextureData, typeof(XRESTextureData), "TextureData (XRES)"),
+                (RESType.MaterialData, null, "MaterialData")
             };
 
             Scene3DMaterialItems.Clear();
-            foreach (var type in scene3DMaterialTypes)
+            foreach (var (type, filterType, displayName) in scene3DMaterialTypes)
             {
-                if (!_items.ContainsKey(type))
-                {
-                    _items[type] = new List<RESElement>();
-                }
+                var key = $"{type}_{filterType?.Name ?? "default"}";
 
                 Scene3DMaterialItems.Add(new TypeListViewItem
                 {
-                    DisplayName = type.ToString(),
+                    DisplayName = displayName,
                     Type = type,
-                    ElementCount = _items[type].Count
+                    FilterType = filterType,
+                    ElementCount = 0
                 });
             }
 
@@ -228,27 +225,26 @@ namespace Level5ResourceEditor.ViewModels.Editor
                 {
                     DisplayName = type.ToString(),
                     Type = type,
+                    FilterType = null,
                     ElementCount = _items[type].Count
                 });
+            }
+
+            // Initialize other standard types
+            foreach (var type in scene3DMaterialTypes.Where(t => t.Item2 == null).Select(t => t.Item1).Distinct())
+            {
+                if (!_items.ContainsKey(type))
+                {
+                    _items[type] = new List<RESElement>();
+                }
             }
         }
 
         public void LoadFile(string filePath)
         {
-            string extension = Path.GetExtension(filePath).ToLower();
+            IResource resource = Resourcer.GetResource(File.ReadAllBytes(filePath));
 
-            if (extension == ".xres")
-            {
-                var xres = new XRES(File.ReadAllBytes(filePath));
-                _items = xres.Items;
-                _isXRES = true;
-            }
-            else
-            {
-                var res = new RES(File.ReadAllBytes(filePath));
-                _items = res.Items;
-                _isXRES = false;
-            }
+            _items = resource.Items;
 
             RefreshAllLists();
         }
@@ -258,7 +254,22 @@ namespace Level5ResourceEditor.ViewModels.Editor
             // Refresh Scene3D Material Items
             foreach (var item in Scene3DMaterialItems)
             {
-                item.ElementCount = _items.ContainsKey(item.Type) ? _items[item.Type].Count : 0;
+                if (_items.ContainsKey(item.Type))
+                {
+                    if (item.FilterType != null)
+                    {
+                        // Count only items of the specified type
+                        item.ElementCount = _items[item.Type].Count(e => e.GetType() == item.FilterType);
+                    }
+                    else
+                    {
+                        item.ElementCount = _items[item.Type].Count;
+                    }
+                }
+                else
+                {
+                    item.ElementCount = 0;
+                }
             }
 
             // Refresh Scene3D Node Items
@@ -266,18 +277,19 @@ namespace Level5ResourceEditor.ViewModels.Editor
             {
                 item.ElementCount = _items.ContainsKey(item.Type) ? _items[item.Type].Count : 0;
             }
-
-            // TODO: Refresh Scene2D items when implemented
         }
 
         private void ClearOtherSelections(string keepSelection)
         {
             if (keepSelection != "Scene3DMaterial")
                 _selectedScene3DMaterialItem = null;
+
             if (keepSelection != "Scene3DNode")
                 _selectedScene3DNodeItem = null;
+
             if (keepSelection != "Scene2DMaterial")
                 _selectedScene2DMaterialItem = null;
+
             if (keepSelection != "Scene2DNode")
                 _selectedScene2DNodeItem = null;
         }
@@ -300,7 +312,20 @@ namespace Level5ResourceEditor.ViewModels.Editor
 
             if (_items != null && _items.ContainsKey(selectedItem.Type))
             {
-                foreach (var element in _items[selectedItem.Type])
+                IEnumerable<RESElement> elementsToShow;
+
+                if (selectedItem.FilterType != null)
+                {
+                    // Filter by specific type (RESTextureData or XRESTextureData)
+                    elementsToShow = _items[selectedItem.Type]
+                        .Where(e => e.GetType() == selectedItem.FilterType);
+                }
+                else
+                {
+                    elementsToShow = _items[selectedItem.Type];
+                }
+
+                foreach (var element in elementsToShow)
                 {
                     Elements.Add(element);
                 }
@@ -313,7 +338,7 @@ namespace Level5ResourceEditor.ViewModels.Editor
             if (selectedItem == null || _items == null)
                 return;
 
-            RESElement newElement = CreateNewElement(selectedItem.Type);
+            RESElement newElement = CreateNewElement(selectedItem.Type, selectedItem.FilterType);
 
             if (!_items.ContainsKey(selectedItem.Type))
             {
@@ -323,7 +348,7 @@ namespace Level5ResourceEditor.ViewModels.Editor
             _items[selectedItem.Type].Add(newElement);
             Elements.Add(newElement);
 
-            selectedItem.ElementCount++;
+            RefreshAllLists();
         }
 
         private void DeleteElement(object parameter)
@@ -340,16 +365,17 @@ namespace Level5ResourceEditor.ViewModels.Editor
                 _items[selectedItem.Type].Remove(SelectedElement);
                 Elements.Remove(SelectedElement);
 
-                selectedItem.ElementCount--;
+                RefreshAllLists();
             }
         }
 
-        private RESElement CreateNewElement(RESType type)
+        private RESElement CreateNewElement(RESType type, Type filterType)
         {
             switch (type)
             {
                 case RESType.TextureData:
-                    if (_isXRES)
+                    // Create according to the type filter
+                    if (filterType == typeof(XRESTextureData))
                     {
                         return new XRESTextureData { Name = "NewTexture" };
                     }
