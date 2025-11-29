@@ -17,6 +17,7 @@ namespace Level5ResourceEditor
     {
         private Button _saveButton;
         private Button _openButton;
+        private ComboBox _languageComboBox;
         private Level5ResourceMainContent _mainContent;
         private Level5ResourceViewModel _editorViewModel;
 
@@ -24,9 +25,22 @@ namespace Level5ResourceEditor
         {
             base.OnStartup(e);
 
-            TranslationService.Instance.Initialize();
+            // Load the saved language or use the system language
+            string savedLanguage = Level5ResourceEditor.Properties.Settings.Default.Language;
+
+            if (!string.IsNullOrEmpty(savedLanguage))
+            {
+                // Use the saved language
+                TranslationService.Instance.Initialize(savedLanguage);
+            }
+            else
+            {
+                // First startup: use the system language
+                TranslationService.Instance.Initialize();
+            }
 
             var menuButtonStyle = Application.Current.FindResource("MenuButtonStyle") as Style;
+            var comboBoxStyle = Application.Current.FindResource("ImaginationComboBox") as Style;
 
             _openButton = new Button
             {
@@ -43,6 +57,33 @@ namespace Level5ResourceEditor
                 Margin = new Thickness(0, 0, 5, 0)
             };
             _saveButton.Click += SaveButton_Click;
+
+            // ComboBox for language selection
+            var languages = new[]
+            {
+                new { Code = "de", Name = "Deutsch" },
+                new { Code = "en", Name = "English" },
+                new { Code = "es", Name = "Español" },
+                new { Code = "fr", Name = "Français" },
+                new { Code = "it", Name = "Italiano" },
+                new { Code = "ja", Name = "日本語" },
+                new { Code = "pt", Name = "Português" },
+                new { Code = "zh_hans", Name = "简体中文" },
+                new { Code = "zh_hant", Name = "繁體中文" }
+            };
+
+            _languageComboBox = new ComboBox
+            {
+                Style = comboBoxStyle,
+                Width = 120,
+                ItemsSource = languages,
+                DisplayMemberPath = "Name",
+                SelectedValuePath = "Code",
+                Margin = new Thickness(0, 0, 10, 0)
+            };
+
+            _languageComboBox.SelectionChanged += LanguageComboBox_SelectionChanged;
+            _languageComboBox.SelectedValue = TranslationService.Instance.CurrentLanguage;
 
             _editorViewModel = new Level5ResourceViewModel();
 
@@ -62,7 +103,8 @@ namespace Level5ResourceEditor
                     Children =
                     {
                         _openButton,
-                        _saveButton
+                        _saveButton,
+                        _languageComboBox
                     }
                 }
             };
@@ -80,6 +122,26 @@ namespace Level5ResourceEditor
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
             mainWindow.Show();
+        }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_languageComboBox.SelectedValue != null)
+            {
+                string newLanguage = _languageComboBox.SelectedValue.ToString();
+                TranslationService.Instance.ChangeLanguage(newLanguage);
+
+                // Save the selected language
+                Level5ResourceEditor.Properties.Settings.Default.Language = newLanguage;
+                Level5ResourceEditor.Properties.Settings.Default.Save();
+
+                // Update button texts
+                _openButton.Content = TranslationService.Instance.GetTranslation("Views.App", "buttonOpen");
+                _saveButton.Content = TranslationService.Instance.GetTranslation("Views.App", "buttonSave");
+
+                // Todo???
+                // _editorViewModel?.RefreshTranslations();
+            }
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)

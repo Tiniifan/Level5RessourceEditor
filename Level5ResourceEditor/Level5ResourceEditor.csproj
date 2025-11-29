@@ -129,6 +129,7 @@
     <EmbeddedResource Include="Resources\Translations\Views\App.json" />
     <EmbeddedResource Include="Resources\Translations\Globals\FileDialog.json" />
     <EmbeddedResource Include="Resources\Translations\Globals\Messages.json" />
+    <EmbeddedResource Include="Resources\Translations\Globals\Errors.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

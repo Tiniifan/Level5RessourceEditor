@@ -26,6 +26,9 @@ namespace Level5ResourceEditor.Services
             _translations = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
         }
 
+        /// <summary>
+        /// Initialise le service de traduction avec la langue du système
+        /// </summary>
         public void Initialize()
         {
             // Detect the system language
@@ -35,6 +38,16 @@ namespace Level5ResourceEditor.Services
             CurrentLanguage = MapLanguageCode(systemLanguage);
 
             // Load translations
+            LoadTranslations();
+        }
+
+        /// <summary>
+        /// Initialise le service de traduction avec une langue spécifique
+        /// </summary>
+        /// <param name="languageCode">Code de langue (ex: "en", "fr", "ja")</param>
+        public void Initialize(string languageCode)
+        {
+            CurrentLanguage = languageCode;
             LoadTranslations();
         }
 
