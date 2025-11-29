@@ -186,8 +186,9 @@ namespace Level5ResourceEditor.ViewModels.Editor
             // Scene3D Material Types
             var scene3DMaterialTypes = new[]
             {
-                (RESType.Material1, typeof(RESMaterial1), "Material 1"),
-                (RESType.Material2, typeof(RESMaterial2), "Material 2"),
+                (RESType.Ref, null, "Ref"),
+                (RESType.Material1, null, "Material 1"),
+                (RESType.Material2, null, "Material 2"),
                 (RESType.TextureData, typeof(RESTextureData), "Texture Data (RES)"),
                 (RESType.TextureData, typeof(XRESTextureData), "Texture Data (XRES)"),
                 (RESType.MaterialData, typeof(ResMaterialData), "Material Data")
