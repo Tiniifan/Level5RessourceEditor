@@ -40,7 +40,6 @@ namespace Level5ResourceEditor
             {
                 Content = TranslationService.Instance.GetTranslation("Views.App", "buttonSave"),
                 Style = menuButtonStyle,
-                IsEnabled = false,
                 Margin = new Thickness(0, 0, 5, 0)
             };
             _saveButton.Click += SaveButton_Click;

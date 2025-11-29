@@ -6,6 +6,7 @@ using StudioElevenLib.Level5.Resource.RES;
 using StudioElevenLib.Level5.Resource.XRES;
 using StudioElevenLib.Level5.Resource.Types;
 using StudioElevenLib.Level5.Resource.Types.Scene3D;
+using Level5ResourceEditor.Services;
 
 namespace Level5ResourceEditor.Infrastructure.Helpers.IO
 {
@@ -56,7 +57,8 @@ namespace Level5ResourceEditor.Infrastructure.Helpers.IO
 
         public void SaveScene2D(Dictionary<RESType, List<RESElement>> items, string filePath, string magic)
         {
-            throw new NotImplementedException("Scene2D save is not yet implemented");
+            throw new NotImplementedException(
+                TranslationService.Instance.GetTranslation("Globals.Errors", "scene2DNotImplemented"));
         }
     }
 }

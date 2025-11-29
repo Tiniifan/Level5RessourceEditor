@@ -1,0 +1,30 @@
+﻿[
+    {
+        "Id": "scene2DNotImplemented",
+        "Names": {
+            "de": "Die Speicherung von Scene2D ist noch nicht implementiert",
+            "en": "Scene2D save is not yet implemented",
+            "es": "El guardado de Scene2D aún no está implementado",
+            "fr": "L'enregistrement de Scene2D n'est pas encore implémenté",
+            "it": "Il salvataggio di Scene2D non è ancora implementato",
+            "ja": "Scene2Dの保存はまだ実装されていません",
+            "pt": "O salvamento de Scene2D ainda não está implementado",
+            "zh_hans": "Scene2D保存尚未实现",
+            "zh_hant": "Scene2D儲存尚未實作"
+        }
+    },
+    {
+        "Id": "notImplemented",
+        "Names": {
+            "de": "Nicht implementiert",
+            "en": "Not Implemented",
+            "es": "No implementado",
+            "fr": "Non implémenté",
+            "it": "Non implementato",
+            "ja": "未実装",
+            "pt": "Não implementado",
+            "zh_hans": "未实现",
+            "zh_hant": "未實作"
+        }
+    }
+]
