@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Level5ResourceEditor.Views.Panels.ResMaterialDataPropertiesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <TextBlock Text="Name" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Material Data Name 1" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding MaterialDataName1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Material Data Name 2" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding MaterialDataName2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Image 1" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding Images[0].Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Image 2" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding Images[1].Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Image 3" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding Images[2].Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+
+            <TextBlock Text="Image 4" 
+                      Style="{StaticResource ImaginationLabel}"
+                      Margin="0,0,0,5"/>
+            <TextBox Style="{StaticResource ImaginationTextBox}"
+                    Text="{Binding Images[3].Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="0,0,0,15"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
