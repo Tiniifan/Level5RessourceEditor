@@ -315,17 +315,29 @@ namespace Level5ResourceEditor.ViewModels.Editor
 
         private void ClearOtherSelections(string keepSelection)
         {
-            if (keepSelection != "Scene3DMaterial")
+            if (keepSelection != "Scene3DMaterial" && _selectedScene3DMaterialItem != null)
+            {
                 _selectedScene3DMaterialItem = null;
+                OnPropertyChanged(nameof(SelectedScene3DMaterialItem));
+            }
 
-            if (keepSelection != "Scene3DNode")
+            if (keepSelection != "Scene3DNode" && _selectedScene3DNodeItem != null)
+            {
                 _selectedScene3DNodeItem = null;
+                OnPropertyChanged(nameof(SelectedScene3DNodeItem));
+            }
 
-            if (keepSelection != "Scene2DMaterial")
+            if (keepSelection != "Scene2DMaterial" && _selectedScene2DMaterialItem != null)
+            {
                 _selectedScene2DMaterialItem = null;
+                OnPropertyChanged(nameof(SelectedScene2DMaterialItem));
+            }
 
-            if (keepSelection != "Scene2DNode")
+            if (keepSelection != "Scene2DNode" && _selectedScene2DNodeItem != null)
+            {
                 _selectedScene2DNodeItem = null;
+                OnPropertyChanged(nameof(SelectedScene2DNodeItem));
+            }
         }
 
         private TypeListViewItem GetSelectedItem()
