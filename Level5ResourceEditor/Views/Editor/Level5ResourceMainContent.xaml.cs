@@ -23,6 +23,37 @@ namespace Level5ResourceEditor.Views.Editor
         public Level5ResourceMainContent()
         {
             InitializeComponent();
+            SelectTab(Scene3DTab);
+        }
+
+        private void TabClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border)
+            {
+                SelectTab(border);
+            }
+        }
+
+        private void SelectTab(Border selectedTab)
+        {
+            // Reset all tabs
+            Scene3DTab.Style = (Style)FindResource("TabItemStyle");
+            Scene2DTab.Style = (Style)FindResource("TabItemStyle");
+
+            // Set selected tab style
+            selectedTab.Style = (Style)FindResource("TabItemSelectedStyle");
+
+            // Show corresponding content
+            if (selectedTab == Scene3DTab)
+            {
+                Scene3DContent.Visibility = Visibility.Visible;
+                Scene2DContent.Visibility = Visibility.Collapsed;
+            }
+            else if (selectedTab == Scene2DTab)
+            {
+                Scene3DContent.Visibility = Visibility.Collapsed;
+                Scene2DContent.Visibility = Visibility.Visible;
+            }
         }
     }
 }

@@ -29,24 +29,125 @@
         <Border Style="{StaticResource PanelBorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="45*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="30*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Panel: Type ListView -->
+                <!-- Left Panel: Tab Control with Scene3D and Scene2D -->
                 <Border Grid.Column="0" Style="{StaticResource PanelBorderStyle}">
-                    <ListView ItemsSource="{Binding TypeListViewItems}"
-                             SelectedItem="{Binding SelectedTypeListViewItem, Mode=TwoWay}"
-                             Style="{StaticResource ImaginationListView}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding DisplayName}" Width="250"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Tab Headers -->
+                        <Border Grid.Row="0" Style="{StaticResource TabContainerStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border x:Name="Scene3DTab" Style="{StaticResource TabItemStyle}" MouseLeftButtonDown="TabClick">
+                                    <TextBlock Text="Scene3D" Style="{StaticResource TabTextStyle}" />
+                                </Border>
+
+                                <Border x:Name="Scene2DTab" Style="{StaticResource TabItemStyle}" MouseLeftButtonDown="TabClick">
+                                    <TextBlock Text="Scene2D" Style="{StaticResource TabTextStyle}" />
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Tab Content -->
+                        <Grid Grid.Row="1" x:Name="TabContentGrid">
+                            <!-- Scene3D Content -->
+                            <Grid x:Name="Scene3DContent" Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Material Items DataGrid -->
+                                <Border Grid.Row="0" Style="{StaticResource PanelBorderStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" 
+                                                  Text="Material Items" 
+                                                  Style="{StaticResource ImaginationLabel}"
+                                                  Margin="10,5"/>
+
+                                        <DataGrid Grid.Row="1"
+                                                 ItemsSource="{Binding Scene3DMaterialItems}"
+                                                 SelectedItem="{Binding SelectedScene3DMaterialItem, Mode=TwoWay}"
+                                                 Style="{StaticResource ImaginationDataGrid}"
+                                                 ColumnHeaderStyle="{StaticResource ImaginationDataGridColumnHeader}"
+                                                 RowStyle="{StaticResource ImaginationDataGridRow}"
+                                                 CellStyle="{StaticResource ImaginationDataGridCell}"
+                                                 AutoGenerateColumns="False"
+                                                 CanUserAddRows="False"
+                                                 CanUserDeleteRows="False"
+                                                 IsReadOnly="True">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Type" 
+                                                                   Width="3*" 
+                                                                   Binding="{Binding DisplayName}"/>
+                                                <DataGridTextColumn Header="Count" 
+                                                                   Width="*" 
+                                                                   Binding="{Binding DisplayCount}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Node Items DataGrid -->
+                                <Border Grid.Row="1" Style="{StaticResource PanelBorderStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" 
+                                                  Text="Node Items" 
+                                                  Style="{StaticResource ImaginationLabel}"
+                                                  Margin="10,5"/>
+
+                                        <DataGrid Grid.Row="1"
+                                                 ItemsSource="{Binding Scene3DNodeItems}"
+                                                 SelectedItem="{Binding SelectedScene3DNodeItem, Mode=TwoWay}"
+                                                 Style="{StaticResource ImaginationDataGrid}"
+                                                 ColumnHeaderStyle="{StaticResource ImaginationDataGridColumnHeader}"
+                                                 RowStyle="{StaticResource ImaginationDataGridRow}"
+                                                 CellStyle="{StaticResource ImaginationDataGridCell}"
+                                                 AutoGenerateColumns="False"
+                                                 CanUserAddRows="False"
+                                                 CanUserDeleteRows="False"
+                                                 IsReadOnly="True">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Type" 
+                                                                   Width="3*" 
+                                                                   Binding="{Binding DisplayName}"/>
+                                                <DataGridTextColumn Header="Count" 
+                                                                   Width="*" 
+                                                                   Binding="{Binding DisplayCount}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <!-- Scene2D Content (TODO) -->
+                            <Grid x:Name="Scene2DContent" Visibility="Collapsed">
+                                <TextBlock Text="Scene2D - Coming Soon" 
+                                          Style="{StaticResource ImaginationLabel}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Border>
 
                 <GridSplitter Grid.Column="1" Style="{StaticResource ImaginationGridSplitter}"/>
