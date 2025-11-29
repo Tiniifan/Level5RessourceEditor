@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Level5ResourceEditor.ViewModels.Dialogs;
 
 namespace Level5ResourceEditor.Views.Dialogs
 {

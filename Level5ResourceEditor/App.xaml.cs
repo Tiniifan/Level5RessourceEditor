@@ -7,6 +7,9 @@ using ImaginationGUI.ViewModels;
 using Level5ResourceEditor.Services;
 using Level5ResourceEditor.ViewModels.Editor;
 using Level5ResourceEditor.Views.Editor;
+using Level5ResourceEditor.Infrastructure.Helpers.IO;
+using Level5ResourceEditor.ViewModels.Dialogs;
+using Level5ResourceEditor.Views.Dialogs;
 
 namespace Level5ResourceEditor
 {
@@ -120,12 +123,91 @@ namespace Level5ResourceEditor
         {
             try
             {
-                // TODO: Implement save logic
+                // Determine current scene type based on selected tab
+                string currentSceneType = "Scene3D";
+
+                var dialogViewModel = new SaveResourceDialogViewModel(
+                    _editorViewModel.CurrentResourceType,
+                    currentSceneType);
+
+                var dialog = new SaveResourceDialog
+                {
+                    ViewModel = dialogViewModel
+                };
+
+                var dialogWindow = new ImaginationGUI.Views.MainWindow
+                {
+                    IsMaximized = false,
+                    Width = 520,
+                    Height = 450,
+                    ResizeMode = ResizeMode.NoResize,
+                    ShowInTaskbar = false,
+                    Title = dialogViewModel.Title,
+                    Content = dialog,
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    MaxHeight = 550,
+                    MinHeight = 550,
+                    MaxWidth = 450,
+                    MinWidth = 450
+                };
+
+                bool? result = null;
+                dialogViewModel.DialogClosed += (s, success) =>
+                {
+                    result = success;
+                    dialogWindow.Close();
+                };
+
+                dialogWindow.ShowDialog();
+
+                if (result == true)
+                {
+                    var items = _editorViewModel.GetItems();
+                    string filePath = dialogViewModel.SelectedFilePath;
+                    string resourceType = dialogViewModel.SelectedResourceType;
+                    string sceneType = dialogViewModel.SelectedSceneType;
+                    string magic = dialogViewModel.Magic;
+
+                    if (resourceType == "RES")
+                    {
+                        var handler = new RESFileHandler();
+                        if (sceneType == "Scene3D")
+                        {
+                            handler.SaveScene3D(items, filePath, magic);
+                        }
+                        else
+                        {
+                            handler.SaveScene2D(items, filePath, magic);
+                        }
+                    }
+                    else // XRES
+                    {
+                        var handler = new XRESFileHandler();
+                        if (sceneType == "Scene3D")
+                        {
+                            handler.SaveScene3D(items, filePath, magic);
+                        }
+                        else
+                        {
+                            handler.SaveScene2D(items, filePath, magic);
+                        }
+                    }
+
+                    MessageBox.Show(
+                        TranslationService.Instance.GetTranslation("Globals.Messages", "fileSavedSuccessfully"),
+                        TranslationService.Instance.GetTranslation("Globals.Messages", "success"),
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+            }
+            catch (NotImplementedException ex)
+            {
                 MessageBox.Show(
-                    "Save functionality not yet implemented",
-                    "Information",
+                    ex.Message,
+                    TranslationService.Instance.GetTranslation("Globals.Messages", "error"),
                     MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                    MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
