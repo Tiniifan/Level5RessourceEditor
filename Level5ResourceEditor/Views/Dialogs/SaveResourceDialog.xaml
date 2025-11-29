@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Level5ResourceEditor.Views.Dialogs.SaveResourceDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="500">
+    <Border Style="{StaticResource WindowBorderStyle}" Margin="10">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- File Path -->
+            <TextBlock Grid.Row="0" 
+                       Text="{Binding FilePathLabel}" 
+                       Style="{StaticResource ImaginationLabel}" 
+                       Margin="0,0,0,5"/>
+            <Grid Grid.Row="1" Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" 
+                        Background="{DynamicResource Theme.Control.BackgroundBrush}"
+                        BorderBrush="{DynamicResource Theme.Border.Brush}"
+                        BorderThickness="1"
+                        CornerRadius="3"
+                        Margin="0,0,5,0">
+                    <TextBox Text="{Binding SelectedFilePath, UpdateSourceTrigger=PropertyChanged}" 
+                             Style="{StaticResource ImaginationTextBox}"
+                             IsReadOnly="True"
+                             Margin="5,0"/>
+                </Border>
+                <Button Grid.Column="1" 
+                        Content="{Binding BrowseButtonText}"
+                        Command="{Binding BrowseCommand}"
+                        Style="{StaticResource ImaginationButton}"/>
+            </Grid>
+
+            <!-- Resource Type (RES/XRES) -->
+            <TextBlock Grid.Row="2" 
+                       Text="{Binding ResourceTypeLabel}" 
+                       Style="{StaticResource ImaginationLabel}" 
+                       Margin="0,0,0,5"/>
+            <ComboBox Grid.Row="3" 
+                      ItemsSource="{Binding ResourceTypes}"
+                      SelectedItem="{Binding SelectedResourceType}"
+                      Style="{StaticResource ImaginationComboBox}"
+                      Margin="0,0,0,15"/>
+
+            <!-- Scene Type -->
+            <TextBlock Grid.Row="4" 
+                       Text="{Binding SceneTypeLabel}" 
+                       Style="{StaticResource ImaginationLabel}" 
+                       Margin="0,0,0,5"/>
+            <ComboBox Grid.Row="5" 
+                      ItemsSource="{Binding SceneTypes}"
+                      SelectedItem="{Binding SelectedSceneType}"
+                      Style="{StaticResource ImaginationComboBox}"
+                      Margin="0,0,0,15"/>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                <Button Content="{Binding SaveButtonText}"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource ImaginationButton}"
+                        IsDefault="True"
+                        Margin="0,0,10,0"/>
+                <Button Content="{Binding CancelButtonText}"
+                        Command="{Binding CancelCommand}"
+                        Style="{StaticResource ImaginationButton}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
