@@ -126,6 +126,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resources\Translations\Views\App.json" />
+    <EmbeddedResource Include="Resources\Translations\Globals\FileDialog.json" />
+    <EmbeddedResource Include="Resources\Translations\Globals\Messages.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -168,8 +171,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

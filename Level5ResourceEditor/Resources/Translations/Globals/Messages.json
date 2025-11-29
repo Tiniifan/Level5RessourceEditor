@@ -1,0 +1,100 @@
+﻿[
+    {
+        "Id": "error",
+        "Names": {
+            "de": "Fehler",
+            "en": "Error",
+            "es": "Error",
+            "fr": "Erreur",
+            "it": "Errore",
+            "ja": "エラー",
+            "pt": "Erro",
+            "zh_hans": "错误",
+            "zh_hant": "錯誤"
+        }
+    },
+    {
+        "Id": "success",
+        "Names": {
+            "de": "Erfolg",
+            "en": "Success",
+            "es": "Éxito",
+            "fr": "Succès",
+            "it": "Successo",
+            "ja": "成功",
+            "pt": "Sucesso",
+            "zh_hans": "成功",
+            "zh_hant": "成功"
+        }
+    },
+    {
+        "Id": "errorOpeningFile",
+        "Names": {
+            "de": "Fehler beim Öffnen der Datei",
+            "en": "Error opening file",
+            "es": "Error al abrir el archivo",
+            "fr": "Erreur lors de l'ouverture du fichier",
+            "it": "Errore nell'apertura del file",
+            "ja": "ファイルを開く際のエラー",
+            "pt": "Erro ao abrir o arquivo",
+            "zh_hans": "打开文件时出错",
+            "zh_hant": "開啟檔案時發生錯誤"
+        }
+    },
+    {
+        "Id": "errorSavingFile",
+        "Names": {
+            "de": "Fehler beim Speichern der Datei",
+            "en": "Error saving file",
+            "es": "Error al guardar el archivo",
+            "fr": "Erreur lors de l'enregistrement du fichier",
+            "it": "Errore nel salvataggio del file",
+            "ja": "ファイル保存時のエラー",
+            "pt": "Erro ao salvar o arquivo",
+            "zh_hans": "保存文件时出错",
+            "zh_hant": "儲存檔案時發生錯誤"
+        }
+    },
+    {
+        "Id": "fileSavedSuccessfully",
+        "Names": {
+            "de": "Datei erfolgreich gespeichert",
+            "en": "File saved successfully",
+            "es": "Archivo guardado correctamente",
+            "fr": "Fichier enregistré avec succès",
+            "it": "File salvato con successo",
+            "ja": "ファイルが正常に保存されました",
+            "pt": "Arquivo salvo com sucesso",
+            "zh_hans": "文件保存成功",
+            "zh_hant": "檔案儲存成功"
+        }
+    },
+    {
+        "Id": "selectFilePath",
+        "Names": {
+            "de": "Bitte wählen Sie einen Dateipfad",
+            "en": "Please select a file path",
+            "es": "Por favor seleccione una ruta de archivo",
+            "fr": "Veuillez sélectionner un chemin de fichier",
+            "it": "Seleziona un percorso file",
+            "ja": "ファイルパスを選択してください",
+            "pt": "Por favor selecione um caminho de arquivo",
+            "zh_hans": "请选择文件路径",
+            "zh_hant": "請選擇檔案路徑"
+        }
+    },
+    {
+        "Id": "enterMagicValue",
+        "Names": {
+            "de": "Bitte geben Sie einen Magic-Wert ein",
+            "en": "Please enter a magic value",
+            "es": "Por favor ingrese un valor mágico",
+            "fr": "Veuillez entrer une valeur magique",
+            "it": "Inserisci un valore magico",
+            "ja": "マジック値を入力してください",
+            "pt": "Por favor insira um valor mágico",
+            "zh_hans": "请输入魔法值",
+            "zh_hant": "請輸入魔法值"
+        }
+    }
+]

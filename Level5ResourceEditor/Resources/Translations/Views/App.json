@@ -1,0 +1,72 @@
+﻿[
+    {
+        "Id": "buttonOpen",
+        "Names": {
+            "de": "Öffnen",
+            "en": "Open",
+            "es": "Abrir",
+            "fr": "Ouvrir",
+            "it": "Apri",
+            "ja": "開く",
+            "pt": "Abrir",
+            "zh_hans": "打开",
+            "zh_hant": "開啟"
+        }
+    },
+    {
+        "Id": "buttonSave",
+        "Names": {
+            "de": "Speichern",
+            "en": "Save",
+            "es": "Guardar",
+            "fr": "Enregistrer",
+            "it": "Salva",
+            "ja": "保存",
+            "pt": "Salvar",
+            "zh_hans": "保存",
+            "zh_hant": "儲存"
+        }
+    },
+    {
+        "Id": "resourceTypeLabel",
+        "Names": {
+            "de": "Ressourcentyp:",
+            "en": "Resource Type:",
+            "es": "Tipo de recurso:",
+            "fr": "Type de ressource :",
+            "it": "Tipo di risorsa:",
+            "ja": "リソースタイプ：",
+            "pt": "Tipo de recurso:",
+            "zh_hans": "资源类型：",
+            "zh_hant": "資源類型："
+        }
+    },
+    {
+        "Id": "sceneTypeLabel",
+        "Names": {
+            "de": "Szenentyp:",
+            "en": "Scene Type:",
+            "es": "Tipo de escena:",
+            "fr": "Type de scène :",
+            "it": "Tipo di scena:",
+            "ja": "シーンタイプ：",
+            "pt": "Tipo de cena:",
+            "zh_hans": "场景类型：",
+            "zh_hant": "場景類型："
+        }
+    },
+    {
+        "Id": "magicLabel",
+        "Names": {
+            "de": "Magic:",
+            "en": "Magic:",
+            "es": "Magic:",
+            "fr": "Magic :",
+            "it": "Magic:",
+            "ja": "Magic：",
+            "pt": "Magic:",
+            "zh_hans": "Magic：",
+            "zh_hant": "Magic："
+        }
+    }
+]

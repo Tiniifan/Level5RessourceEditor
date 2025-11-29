@@ -1,0 +1,86 @@
+﻿[
+    {
+        "Id": "openFile",
+        "Names": {
+            "de": "Datei öffnen",
+            "en": "Open File",
+            "es": "Abrir archivo",
+            "fr": "Ouvrir un fichier",
+            "it": "Apri file",
+            "ja": "ファイルを開く",
+            "pt": "Abrir arquivo",
+            "zh_hans": "打开文件",
+            "zh_hant": "開啟檔案"
+        }
+    },
+    {
+        "Id": "saveFile",
+        "Names": {
+            "de": "Datei speichern",
+            "en": "Save File",
+            "es": "Guardar archivo",
+            "fr": "Enregistrer le fichier",
+            "it": "Salva file",
+            "ja": "ファイルを保存",
+            "pt": "Salvar arquivo",
+            "zh_hans": "保存文件",
+            "zh_hant": "儲存檔案"
+        }
+    },
+    {
+        "Id": "filePath",
+        "Names": {
+            "de": "Dateipfad",
+            "en": "File Path",
+            "es": "Ruta del archivo",
+            "fr": "Chemin du fichier",
+            "it": "Percorso file",
+            "ja": "ファイルパス",
+            "pt": "Caminho do arquivo",
+            "zh_hans": "文件路径",
+            "zh_hant": "檔案路徑"
+        }
+    },
+    {
+        "Id": "browse",
+        "Names": {
+            "de": "Durchsuchen",
+            "en": "Browse",
+            "es": "Examinar",
+            "fr": "Parcourir",
+            "it": "Sfoglia",
+            "ja": "参照",
+            "pt": "Procurar",
+            "zh_hans": "浏览",
+            "zh_hant": "瀏覽"
+        }
+    },
+    {
+        "Id": "save",
+        "Names": {
+            "de": "Speichern",
+            "en": "Save",
+            "es": "Guardar",
+            "fr": "Enregistrer",
+            "it": "Salva",
+            "ja": "保存",
+            "pt": "Salvar",
+            "zh_hans": "保存",
+            "zh_hant": "儲存"
+        }
+    },
+    {
+        "Id": "cancel",
+        "Names": {
+            "de": "Abbrechen",
+            "en": "Cancel",
+            "es": "Cancelar",
+            "fr": "Annuler",
+            "it": "Annulla",
+            "ja": "キャンセル",
+            "pt": "Cancelar",
+            "zh_hans": "取消",
+            "zh_hant": "取消"
+        }
+    }
+]

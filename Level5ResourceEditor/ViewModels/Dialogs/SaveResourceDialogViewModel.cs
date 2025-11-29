@@ -115,9 +115,9 @@ namespace Level5ResourceEditor.ViewModels.Dialogs
             var ts = TranslationService.Instance;
             FilePathLabel = ts.GetTranslation("Globals.FileDialog", "filePath");
             BrowseButtonText = ts.GetTranslation("Globals.FileDialog", "browse");
-            ResourceTypeLabel = "Resource Type:";
-            SceneTypeLabel = "Scene Type:";
-            MagicLabel = "Magic:";
+            ResourceTypeLabel = ts.GetTranslation("Views.App", "resourceTypeLabel");
+            SceneTypeLabel = ts.GetTranslation("Views.App", "sceneTypeLabel");
+            MagicLabel = ts.GetTranslation("Views.App", "magicLabel");
             SaveButtonText = ts.GetTranslation("Globals.FileDialog", "save");
             CancelButtonText = ts.GetTranslation("Globals.FileDialog", "cancel");
             Title = ts.GetTranslation("Globals.FileDialog", "saveFile");
@@ -188,7 +188,7 @@ namespace Level5ResourceEditor.ViewModels.Dialogs
             if (string.IsNullOrEmpty(Magic))
             {
                 MessageBox.Show(
-                    "Please enter a magic value.",
+                    TranslationService.Instance.GetTranslation("Globals.Messages", "enterMagicValue"),
                     TranslationService.Instance.GetTranslation("Globals.Messages", "error"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
