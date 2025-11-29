@@ -24,5 +24,11 @@ namespace Level5ResourceEditor.Views.Dialogs
         {
             InitializeComponent();
         }
+
+        public SaveResourceDialogViewModel ViewModel
+        {
+            get => DataContext as SaveResourceDialogViewModel;
+            set => DataContext = value;
+        }
     }
 }
