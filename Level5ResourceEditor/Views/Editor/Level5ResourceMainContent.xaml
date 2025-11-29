@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Level5ResourceEditor.Views.Editor.Level5ResourceMainContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:panels="clr-namespace:Level5ResourceEditor.Views.Panels"
+             xmlns:scene3d="clr-namespace:StudioElevenLib.Level5.Resource.Types.Scene3D;assembly=StudioElevenLib"
+             xmlns:types="clr-namespace:StudioElevenLib.Level5.Resource.Types;assembly=StudioElevenLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <!-- Data templates for different element types -->
+        <DataTemplate DataType="{x:Type types:RESElement}">
+            <panels:RESElementPropertiesPanel/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type scene3d:RESTextureData}">
+            <panels:RESTextureDataPropertiesPanel/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type scene3d:XRESTextureData}">
+            <panels:XRESTextureDataPropertiesPanel/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type scene3d:ResMaterialData}">
+            <panels:ResMaterialDataPropertiesPanel/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Border Style="{StaticResource PanelBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Panel: Type ListView -->
+                <Border Grid.Column="0" Style="{StaticResource PanelBorderStyle}">
+                    <ListView ItemsSource="{Binding TypeListViewItems}"
+                             SelectedItem="{Binding SelectedTypeListViewItem, Mode=TwoWay}"
+                             Style="{StaticResource ImaginationListView}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding DisplayName}" Width="250"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+
+                <GridSplitter Grid.Column="1" Style="{StaticResource ImaginationGridSplitter}"/>
+
+                <!-- Center Panel: Elements DataGrid -->
+                <Border Grid.Column="2" Style="{StaticResource PanelBorderStyle}">
+                    <DataGrid ItemsSource="{Binding Elements}"
+                             SelectedItem="{Binding SelectedElement, Mode=TwoWay}"
+                             Style="{StaticResource ImaginationDataGrid}"
+                             ColumnHeaderStyle="{StaticResource ImaginationDataGridColumnHeader}"
+                             RowStyle="{StaticResource ImaginationDataGridRow}"
+                             CellStyle="{StaticResource ImaginationDataGridCell}"
+                             AutoGenerateColumns="False"
+                             CanUserAddRows="True"
+                             CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                               Width="*"
+                                               Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="Margin" Value="10,0,10,0"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <GridSplitter Grid.Column="3" Style="{StaticResource ImaginationGridSplitter}"/>
+
+                <!-- Right Panel: Properties -->
+                <Border Grid.Column="4" Style="{StaticResource PanelBorderStyle}">
+                    <ContentControl Content="{Binding SelectedElement}">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedElement}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
