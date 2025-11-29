@@ -68,8 +68,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Infrastructure\Helpers\IO\RESFileHandler.cs" />
+    <Compile Include="Infrastructure\Helpers\IO\XRESFileHandler.cs" />
     <Compile Include="Models\TypeListViewItem.cs" />
     <Compile Include="Services\TranslationService.cs" />
+    <Compile Include="ViewModels\Dialogs\SaveResourceDialogViewModel.cs" />
     <Compile Include="ViewModels\Editor\Level5ResourceViewModel.cs" />
     <Compile Include="ViewModels\ListView\ListViewItemViewModel.cs" />
     <Compile Include="Views\DataGrids\ElementsDataGridView.xaml.cs">
@@ -80,6 +83,9 @@
     </Compile>
     <Compile Include="Views\DataGrids\NodeItemsDataGridView.xaml.cs">
       <DependentUpon>NodeItemsDataGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\SaveResourceDialog.xaml.cs">
+      <DependentUpon>SaveResourceDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Level5ResourceMainContent.xaml.cs">
       <DependentUpon>Level5ResourceMainContent.xaml</DependentUpon>
@@ -134,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataGrids\NodeItemsDataGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\SaveResourceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
