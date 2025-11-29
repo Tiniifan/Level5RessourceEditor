@@ -20,40 +20,61 @@ namespace Level5ResourceEditor.Views.Editor
     /// </summary>
     public partial class Level5ResourceMainContent : UserControl
     {
+        private Border _activeTab;
+
         public Level5ResourceMainContent()
         {
             InitializeComponent();
-            SelectTab(Scene3DTab);
+            SetActiveTab(Scene3DTab);
         }
 
         private void TabClick(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border border)
+            if (sender is Border tab)
             {
-                SelectTab(border);
+                SetActiveTab(tab);
             }
         }
 
-        private void SelectTab(Border selectedTab)
+        private void SetActiveTab(Border selectedTab)
         {
-            // Reset all tabs
-            Scene3DTab.Style = (Style)FindResource("TabItemStyle");
-            Scene2DTab.Style = (Style)FindResource("TabItemStyle");
+            ResetTabStyles();
+            _activeTab = selectedTab;
 
-            // Set selected tab style
-            selectedTab.Style = (Style)FindResource("TabItemSelectedStyle");
+            // Style du tab actif
+            selectedTab.Background = (Brush)FindResource("Theme.Accent.Brush");
+            selectedTab.Opacity = 1.0;
 
-            // Show corresponding content
+            // Affichage des contenus
             if (selectedTab == Scene3DTab)
             {
-                Scene3DContent.Visibility = Visibility.Visible;
-                Scene2DContent.Visibility = Visibility.Collapsed;
+                ShowScene3DContent();
             }
             else if (selectedTab == Scene2DTab)
             {
-                Scene3DContent.Visibility = Visibility.Collapsed;
-                Scene2DContent.Visibility = Visibility.Visible;
+                ShowScene2DContent();
             }
+        }
+
+        private void ResetTabStyles()
+        {
+            Scene3DTab.Background = (Brush)FindResource("Theme.Control.BackgroundBrush");
+            Scene3DTab.Opacity = 0.8;
+
+            Scene2DTab.Background = (Brush)FindResource("Theme.Control.BackgroundBrush");
+            Scene2DTab.Opacity = 0.8;
+        }
+
+        private void ShowScene3DContent()
+        {
+            Scene3DContent.Visibility = Visibility.Visible;
+            Scene2DContent.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowScene2DContent()
+        {
+            Scene3DContent.Visibility = Visibility.Collapsed;
+            Scene2DContent.Visibility = Visibility.Visible;
         }
     }
 }
