@@ -247,6 +247,7 @@ namespace Level5ResourceEditor.ViewModels.Editor
                 (RESType.AnimationMTM2, "MTM2"),
                 (RESType.Shading, "Shading"),
                 (RESType.Properties, "Property"),
+                (RESType.LookUpTable, "Look Up Table"),
                 (RESType.MTNINF,  "MTNINF"),
                 (RESType.MTNINF2,  "MTNINF2"),
                 (RESType.IMMINF, "IMMINF"),

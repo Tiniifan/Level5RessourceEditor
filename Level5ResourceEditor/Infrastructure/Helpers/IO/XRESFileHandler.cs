@@ -49,7 +49,7 @@ namespace Level5ResourceEditor.Infrastructure.Helpers.IO
             // Process nodes for Scene3D
             var nodeTypes = new[] { RESType.MeshName, RESType.Bone, RESType.AnimationMTN2,
                 RESType.AnimationIMN2, RESType.AnimationMTM2, RESType.Shading,
-                RESType.Properties, RESType.MTNINF, RESType.IMMINF, RESType.MTMINF, RESType.Textproj };
+                RESType.Properties, RESType.LookUpTable, RESType.MTNINF, RESType.IMMINF, RESType.MTMINF, RESType.Textproj };
 
             foreach (var nodeType in nodeTypes)
             {
